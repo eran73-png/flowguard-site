@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About FlowGuard — Built by EHZ-AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #060b14;
+  --bg2: #0a1020;
+  --panel: #0d1830;
+  --border: #1a2d4a;
+  --accent: #00d4ff;
+  --accent2: #6366f1;
+  --green: #10b981;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --muted2: #94a3b8;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(6,11,20,0.85); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(26,45,74,0.8);
+  padding: 0 40px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-icon {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, #00d4ff, #6366f1);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: #fff; font-style: italic;
+}
+.nav-logo-text { font-size: 17px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { color: var(--muted2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: linear-gradient(135deg, #00d4ff, #6366f1);
+  color: #000 !important; font-weight: 700 !important; font-size: 13px !important;
+  padding: 8px 20px; border-radius: 8px;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* Language */
+.he { display: none !important; }
+body.he-mode .en { display: none !important; }
+body.he-mode .he { display: revert !important; }
+
+.lang-toggle {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: var(--muted2); font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 8px; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: all 0.2s;
+}
+.lang-toggle:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+
+/* HERO */
+.page-header {
+  padding: 120px 24px 80px;
+  text-align: center;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(16,185,129,0.06) 0%, transparent 70%);
+}
+.page-header h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 900; letter-spacing: -2px; margin-bottom: 16px; }
+.page-header h1 span { background: linear-gradient(135deg, #00d4ff, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.page-header p { color: var(--muted2); font-size: 18px; max-width: 540px; margin: 0 auto; line-height: 1.7; }
+
+/* STORY */
+.story-section { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
+.story-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+.story-section p {
+  font-size: 16px; color: var(--muted2); line-height: 1.8; margin-bottom: 20px;
+}
+.story-section p strong { color: var(--text); }
+.story-highlight {
+  background: var(--panel); border: 1px solid rgba(0,212,255,0.2); border-radius: 12px;
+  padding: 24px 28px; margin: 32px 0;
+  border-left: 3px solid var(--accent);
+  font-size: 17px; color: var(--text); font-style: italic; line-height: 1.7;
+}
+
+/* FOUNDER */
+.founder-section { background: var(--bg2); }
+.founder-inner { max-width: 900px; margin: 0 auto; padding: 80px 24px; }
+.founder-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 20px;
+  padding: 40px; display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start;
+}
+@media (max-width: 600px) { .founder-card { grid-template-columns: 1fr; } }
+.founder-avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(99,102,241,0.2));
+  border: 2px solid rgba(0,212,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; flex-shrink: 0;
+}
+.founder-name { font-size: 26px; font-weight: 800; margin-bottom: 4px; }
+.founder-title { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 20px; }
+.founder-bio { font-size: 15px; color: var(--muted2); line-height: 1.8; margin-bottom: 24px; }
+.founder-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.skill-tag {
+  background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
+  color: var(--accent); font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 20px;
+}
+.founder-contact { display: flex; flex-direction: column; gap: 8px; }
+.contact-row { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted2); }
+.contact-icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* MISSION */
+.mission-section { max-width: 900px; margin: 0 auto; padding: 80px 24px; }
+.section-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.section-sub { color: var(--muted2); margin-bottom: 40px; }
+.mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.mission-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+  padding: 28px 24px;
+}
+.mission-icon { font-size: 32px; margin-bottom: 14px; }
+.mission-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.mission-desc { font-size: 14px; color: var(--muted2); line-height: 1.6; }
+
+/* TECH STACK */
+.tech-section { background: var(--bg2); }
+.tech-inner { max-width: 900px; margin: 0 auto; padding: 80px 24px; }
+.tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 40px; }
+.tech-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; text-align: center; transition: border-color 0.2s;
+}
+.tech-card:hover { border-color: rgba(0,212,255,0.3); }
+.tech-card-icon { font-size: 32px; margin-bottom: 10px; }
+.tech-card-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.tech-card-desc { font-size: 12px; color: var(--muted); }
+
+/* TIMELINE */
+.timeline-section { max-width: 800px; margin: 0 auto; padding: 80px 24px; }
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, var(--accent), rgba(99,102,241,0.3));
+}
+.timeline-item { position: relative; margin-bottom: 32px; }
+.timeline-dot {
+  position: absolute; left: -28px; top: 4px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(0,212,255,0.4);
+}
+.timeline-date { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.timeline-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 14px; color: var(--muted2); line-height: 1.6; }
+
+/* CTA */
+.cta-section {
+  margin: 60px 24px; max-width: 700px; margin-left: auto; margin-right: auto;
+  background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(99,102,241,0.06));
+  border: 1px solid rgba(0,212,255,0.2); border-radius: 20px;
+  padding: 60px 40px; text-align: center;
+}
+.cta-section h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+.cta-section p { color: var(--muted2); font-size: 16px; margin-bottom: 32px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #00d4ff, #6366f1);
+  color: #000; font-weight: 700; font-size: 15px;
+  padding: 14px 36px; border-radius: 10px; text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 30px rgba(0,212,255,0.25);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 40px rgba(0,212,255,0.4); }
+
+footer {
+  text-align: center; padding: 40px 24px;
+  border-top: 1px solid var(--border); color: var(--muted); font-size: 13px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+.footer-ehz { color: var(--green); font-weight: 700; font-size: 14px; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <button onclick="toggleLang()" class="lang-toggle" id="langBtn">🇮🇱 עברית</button>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">F</div>
+    <span class="nav-logo-text">FlowGuard</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#features" class="en">Features</a>
+    <a href="index.html#features" class="he">יכולות</a>
+    <a href="demo.html" class="en">Demo</a>
+    <a href="demo.html" class="he">הדגמה</a>
+    <a href="about.html" class="en">About</a>
+    <a href="about.html" class="he">אודות</a>
+    <a href="download.html" class="nav-cta en">⬇ Download</a>
+    <a href="download.html" class="nav-cta he">⬇ הורדה</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 class="en">Built by a <span>Security Engineer</span></h1>
+  <h1 class="he">נבנה על ידי <span>מהנדס אבטחה</span></h1>
+  <p class="en">FlowGuard was born from a real problem — an IT professional who wanted to know exactly what his AI agent was doing on his systems.</p>
+  <p class="he">FlowGuard נולד מבעיה אמיתית — איש IT שרצה לדעת בדיוק מה סוכן ה-AI שלו עושה על המערכות שלו.</p>
+</div>
+
+<!-- STORY -->
+<div class="story-section">
+  <h2 class="en">The Problem</h2>
+  <h2 class="he">הבעיה</h2>
+  <p class="en">
+    When <strong>Claude Code</strong> started running on my systems — managing files, executing commands, calling APIs — I realized there was no way to audit what it was actually doing. No log. No alert. No audit trail.
+  </p>
+  <p class="he">
+    כשהתחלתי להשתמש ב-<strong>Claude Code</strong> — ניהול קבצים, הרצת פקודות, קריאות API — הבנתי שאין שום דרך לבדוק מה הוא עושה בפועל. אין לוג. אין התראה. אין שביל ביקורת.
+  </p>
+  <p class="en">
+    As an IT professional with 20+ years managing enterprise infrastructure, this was unacceptable. Every change to a production system leaves a trace. Every privileged action is logged. Why should AI be different?
+  </p>
+  <p class="he">
+    כאיש IT עם 20+ שנות ניסיון בניהול תשתיות ארגוניות — זה היה בלתי מקובל עליי. כל שינוי במערכת ייצור משאיר עקבות. כל פעולה מיוחסת מתועדת. למה שה-AI יהיה שונה?
+  </p>
+  <div class="story-highlight en">
+    "If you wouldn't let an unknown intern execute unrestricted commands on your servers, why would you let an AI agent do it?"
+  </div>
+  <div class="story-highlight he">
+    "אם לא היית מאפשר לעובד לא מוכר להריץ פקודות ללא הגבלה על השרתים שלך — למה שתאפשר לסוכן AI לעשות את זה?"
+  </div>
+  <p class="en">
+    So I built FlowGuard. Starting as a simple hook script, it grew into a full security monitoring platform — real-time event collection, Telegram alerts, a browser dashboard, 69+ detection rules, file audit scanning, SIEM integration, and automated reporting.
+  </p>
+  <p class="he">
+    אז בניתי את FlowGuard. מסקריפט hook פשוט, הוא גדל לפלטפורמת ניטור אבטחה מלאה — איסוף אירועים בזמן אמת, התראות Telegram, לוח בקרה בדפדפן, 69+ כללי זיהוי, סריקת קבצים, אינטגרציית SIEM ודיווח אוטומטי.
+  </p>
+  <p class="en">
+    Phase A is <strong>monitoring</strong>. Everything FlowGuard detects is logged and alerted — but never blocked. Your AI keeps working. You stay informed.
+    Phase B (coming) will add <strong>active blocking</strong> — automatically stopping dangerous actions before they execute.
+  </p>
+  <p class="he">
+    שלב A הוא <strong>ניטור</strong>. כל מה ש-FlowGuard מזהה מתועד ומתריע — אך לעולם לא נחסם. ה-AI ממשיך לעבוד. אתה נשאר מעודכן.
+    שלב B (בקרוב) יוסיף <strong>חסימה פעילה</strong> — עצירה אוטומטית של פעולות מסוכנות לפני שהן מתבצעות.
+  </p>
+</div>
+
+<!-- FOUNDER -->
+<div class="founder-section">
+  <div class="founder-inner">
+    <div class="founder-card">
+      <div class="founder-avatar">👨‍💻</div>
+      <div>
+        <div class="founder-name">Eran Hershkowitz</div>
+        <div class="founder-title en">Founder · EHZ-AI | IT Infrastructure & Security Engineer</div>
+        <div class="founder-title he">מייסד · EHZ-AI | מהנדס תשתיות ואבטחת מידע</div>
+        <div class="founder-bio en">
+          20+ years of hands-on experience managing enterprise IT infrastructure — Active Directory, Exchange, VMware, Nutanix, backup systems, and security. Worked with organizations including Bank of Jerusalem, and has built dozens of automation tools, health-check scripts, and monitoring systems.<br/><br/>
+          FlowGuard is my answer to the question nobody else seemed to be asking: <em>who's watching the AI?</em>
+        </div>
+        <div class="founder-bio he">
+          20+ שנות ניסיון מעשי בניהול תשתיות IT ארגוניות — Active Directory, Exchange, VMware, Nutanix, מערכות גיבוי ואבטחה. עבד עם ארגונים כולל בנק ירושלים, ובנה עשרות כלי אוטומציה, סקריפטי בדיקות תקינות ומערכות ניטור.<br/><br/>
+          FlowGuard הוא התשובה שלי לשאלה שאיש לא נראה שאל: <em>מי שומר על ה-AI?</em>
+        </div>
+        <div class="founder-contact">
+          <div class="contact-row"><span class="contact-icon">📱</span><span>054-4825276</span></div>
+          <div class="contact-row"><span class="contact-icon">🌐</span><span>EHZ-AI — AI Security Tools</span></div>
+          <div class="contact-row"><span class="contact-icon">📍</span><span>Israel</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<div class="mission-section">
+  <div class="section-title en">What We Believe</div>
+  <div class="section-title he">מה אנחנו מאמינים</div>
+  <div class="section-sub en">The principles behind every decision in FlowGuard</div>
+  <div class="section-sub he">העקרונות מאחורי כל החלטה ב-FlowGuard</div>
+  <div class="mission-grid">
+    <div class="mission-card">
+      <div class="mission-icon">🔒</div>
+      <div class="mission-title en">Local First</div>
+      <div class="mission-title he">מקומי קודם</div>
+      <div class="mission-desc en">Your security events never leave your machine. No cloud backend. No telemetry. No accounts. Complete privacy by design.</div>
+      <div class="mission-desc he">אירועי האבטחה לעולם לא יוצאים מהמחשב שלך. ללא ענן. ללא טלמטריה. ללא חשבונות. פרטיות מלאה מתוך עיצוב.</div>
+    </div>
+    <div class="mission-card">
+      <div class="mission-icon">👁️</div>
+      <div class="mission-title en">Monitor First, Block Later</div>
+      <div class="mission-title he">קודם נטר, אחר כך חסום</div>
+      <div class="mission-desc en">Phase A monitors. Your AI keeps working normally. You gain visibility first — blocking comes in Phase B when you're confident.</div>
+      <div class="mission-desc he">שלב A מנטר. ה-AI שלך ממשיך לעבוד כרגיל. קודם מקבלים נראות — חסימה תבוא בשלב B כשאתה בטוח.</div>
+    </div>
+    <div class="mission-card">
+      <div class="mission-icon">⚡</div>
+      <div class="mission-title en">Zero Friction</div>
+      <div class="mission-title he">אפס חיכוך</div>
+      <div class="mission-desc en">One installer. No configuration required to start. Claude Code keeps running. FlowGuard hooks in silently and immediately.</div>
+      <div class="mission-desc he">מתקין אחד. אין צורך בהגדרות. Claude Code ממשיך לרוץ. FlowGuard מתחבר בשקט ומיידית.</div>
+    </div>
+    <div class="mission-card">
+      <div class="mission-icon">🔓</div>
+      <div class="mission-title en">Open Source</div>
+      <div class="mission-title he">קוד פתוח</div>
+      <div class="mission-desc en">All detection rules on GitHub. Audit the code. Contribute rules. Security tools shouldn't be black boxes.</div>
+      <div class="mission-desc he">כל כללי הזיהוי ב-GitHub. בדוק את הקוד. תרום כללים. כלי אבטחה לא צריכים להיות קופסאות שחורות.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TECH -->
+<div class="tech-section">
+  <div class="tech-inner">
+    <div class="section-title en">Built With</div>
+    <div class="section-title he">טכנולוגיות</div>
+    <div class="section-sub en">The technology stack behind FlowGuard</div>
+    <div class="section-sub he">ערימת הטכנולוגיות מאחורי FlowGuard</div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-card-icon">🟢</div>
+        <div class="tech-card-name">Node.js</div>
+        <div class="tech-card-desc">Core runtime (bundled in installer)</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-icon">⚡</div>
+        <div class="tech-card-name">Express</div>
+        <div class="tech-card-desc">Local collector API server</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-icon">🎯</div>
+        <div class="tech-card-name">Claude Hooks</div>
+        <div class="tech-card-desc">PreToolUse/PostToolUse/Stop events</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-icon">🛡️</div>
+        <div class="tech-card-name">69+ Rules</div>
+        <div class="tech-card-desc">File, Net, Git, Proc, Secret, Lateral</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-icon">📊</div>
+        <div class="tech-card-name">Chart.js</div>
+        <div class="tech-card-desc">Dashboard visualizations</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-icon">📱</div>
+        <div class="tech-card-name">Telegram API</div>
+        <div class="tech-card-desc">Real-time push alerts</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-icon">📋</div>
+        <div class="tech-card-name">ExcelJS</div>
+        <div class="tech-card-desc">Security report export</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-icon">🔗</div>
+        <div class="tech-card-name">SSE / CEF</div>
+        <div class="tech-card-desc">Live stream + SIEM integration</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2 class="en">Try FlowGuard Free</h2>
+  <h2 class="he">נסה את FlowGuard חינם</h2>
+  <p class="en">No account. No cloud. No strings. Download and install in 60 seconds.</p>
+  <p class="he">ללא חשבון. ללא ענן. ללא התחייבות. הורד והתקן תוך 60 שניות.</p>
+  <a href="download.html" class="btn-primary en">⬇ Download for Windows</a>
+  <a href="download.html" class="btn-primary he">⬇ הורד ל-Windows</a>
+</div>
+
+<footer>
+  <p>&copy; 2026 FlowGuard · EHZ-AI · Built in Israel 🇮🇱</p>
+  <p style="margin-top: 8px;"><a href="index.html">Home</a> · <a href="demo.html">Demo</a> · <a href="download.html">Download</a> · <a href="https://github.com/eran73-png/ehz-sec-ai">GitHub</a></p>
+  <p class="footer-ehz">הדף נבנה ע"י EHZ-AI | 054-4825276</p>
+</footer>
+
+<script>
+function applyLang(isHe) {
+  document.body.classList.toggle('he-mode', isHe);
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr';
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = isHe ? '🇺🇸 English' : '🇮🇱 עברית';
+  localStorage.setItem('fg-lang', isHe ? 'he' : 'en');
+}
+function toggleLang() { applyLang(!document.body.classList.contains('he-mode')); }
+(function() { if (localStorage.getItem('fg-lang') === 'he') applyLang(true); })();
+</script>
+</body>
+</html>

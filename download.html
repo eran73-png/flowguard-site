@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Download FlowGuard — AI Security Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #060b14;
+  --bg2: #0a1020;
+  --panel: #0d1830;
+  --border: #1a2d4a;
+  --accent: #00d4ff;
+  --accent2: #6366f1;
+  --green: #10b981;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --muted2: #94a3b8;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(6,11,20,0.85); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(26,45,74,0.8);
+  padding: 0 40px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-icon {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, #00d4ff, #6366f1);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: #fff; font-style: italic;
+}
+.nav-logo-text { font-size: 17px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { color: var(--muted2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: linear-gradient(135deg, #00d4ff, #6366f1);
+  color: #000 !important; font-weight: 700 !important; font-size: 13px !important;
+  padding: 8px 20px; border-radius: 8px;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.85; }
+.lang-toggle {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: var(--muted2); font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 8px; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: all 0.2s;
+}
+.lang-toggle:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+.he { display: none !important; }
+body.he-mode .en { display: none !important; }
+body.he-mode .he { display: revert !important; }
+
+/* PAGE HEADER */
+.page-header {
+  padding: 120px 24px 60px;
+  text-align: center;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,212,255,0.07) 0%, transparent 70%);
+}
+.page-header h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 900; letter-spacing: -2px; margin-bottom: 16px; }
+.page-header h1 span { background: linear-gradient(135deg, #00d4ff, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.page-header p { color: var(--muted2); font-size: 18px; max-width: 520px; margin: 0 auto; }
+
+/* DOWNLOAD CARDS */
+.download-section { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
+.platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 60px; }
+.platform-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+  padding: 32px; transition: border-color 0.2s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.platform-card.featured { border-color: rgba(0,212,255,0.4); }
+.platform-card.featured::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(135deg, #00d4ff, #6366f1);
+}
+.platform-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.3); }
+.platform-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 20px;
+}
+.badge-available { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+.badge-soon { background: rgba(245,158,11,0.1); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
+.platform-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+.platform-name { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.platform-desc { color: var(--muted2); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+.platform-meta { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+.platform-meta-row { display: flex; justify-content: space-between; font-size: 12px; }
+.platform-meta-row span:first-child { color: var(--muted); }
+.platform-meta-row span:last-child { color: var(--muted2); font-weight: 500; }
+.btn-download {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 13px; border-radius: 10px;
+  font-size: 14px; font-weight: 700; text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-download-primary {
+  background: linear-gradient(135deg, #00d4ff, #6366f1);
+  color: #000;
+  box-shadow: 0 0 20px rgba(0,212,255,0.2);
+}
+.btn-download-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 30px rgba(0,212,255,0.35); }
+.btn-download-disabled {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  color: var(--muted); cursor: not-allowed;
+}
+
+/* REQUIREMENTS */
+.requirements { background: var(--bg2); }
+.req-inner { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+.section-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.section-sub { color: var(--muted2); margin-bottom: 40px; }
+.req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.req-item {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 24px; display: flex; align-items: flex-start; gap: 14px;
+}
+.req-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.req-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.req-val { font-size: 13px; color: var(--muted2); }
+
+/* RELEASE NOTES */
+.release-section { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+.version-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+  padding: 28px 32px; margin-bottom: 20px;
+}
+.version-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.version-num { font-size: 20px; font-weight: 800; }
+.version-date { font-size: 13px; color: var(--muted); }
+.version-tag {
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.3);
+  margin-left: auto;
+}
+.change-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.change-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--muted2); line-height: 1.5; }
+.change-list li::before { content: '→'; color: var(--accent); font-weight: 700; margin-top: 1px; flex-shrink: 0; }
+.change-list li strong { color: var(--text); }
+
+/* SHA */
+.sha-box {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 24px; margin-top: 40px;
+}
+.sha-title { font-size: 13px; font-weight: 700; color: var(--muted2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.sha-row { display: flex; align-items: center; gap: 12px; font-family: monospace; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+.sha-file { color: var(--accent); }
+
+/* INSTALL STEPS */
+.steps-section { background: var(--bg2); }
+.steps-inner { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 40px; }
+.step-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px 20px; text-align: center;
+}
+.step-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(99,102,241,0.15));
+  border: 1px solid rgba(0,212,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; color: var(--accent);
+  margin: 0 auto 14px;
+}
+.step-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.step-desc { font-size: 12px; color: var(--muted2); line-height: 1.5; }
+
+footer {
+  text-align: center; padding: 40px 24px;
+  border-top: 1px solid var(--border); color: var(--muted); font-size: 13px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+.footer-ehz { color: var(--green); font-weight: 700; font-size: 14px; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <button onclick="toggleLang()" class="lang-toggle" id="langBtn">🇮🇱 עברית</button>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">F</div>
+    <span class="nav-logo-text">FlowGuard</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#features" class="en">Features</a>
+    <a href="index.html#features" class="he">יכולות</a>
+    <a href="demo.html" class="en">Demo</a>
+    <a href="demo.html" class="he">הדגמה</a>
+    <a href="about.html" class="en">About</a>
+    <a href="about.html" class="he">אודות</a>
+    <a href="download.html" class="nav-cta en">⬇ Download</a>
+    <a href="download.html" class="nav-cta he">⬇ הורדה</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Download <span>FlowGuard</span></h1>
+  <p>Free. No account required. Runs locally on your machine.</p>
+</div>
+
+<!-- PLATFORM CARDS -->
+<div class="download-section">
+  <div class="platform-grid">
+
+    <!-- Windows -->
+    <div class="platform-card featured">
+      <span class="platform-badge badge-available">✓ Available Now</span>
+      <span class="platform-icon">🪟</span>
+      <div class="platform-name">Windows</div>
+      <div class="platform-desc">One-click installer with wizard. Includes Node.js bundled — no dependencies needed.</div>
+      <div class="platform-meta">
+        <div class="platform-meta-row"><span>Version</span><span>2.1.1</span></div>
+        <div class="platform-meta-row"><span>File Size</span><span>6.9 MB</span></div>
+        <div class="platform-meta-row"><span>Requirements</span><span>Windows 10/11 x64</span></div>
+        <div class="platform-meta-row"><span>Released</span><span>April 2026</span></div>
+      </div>
+      <a href="files/FlowGuard-Setup-v2.1.1.exe" class="btn-download btn-download-primary en">
+        ⬇ Download FlowGuard-Setup-v2.1.1.exe
+      </a>
+      <a href="files/FlowGuard-Setup-v2.1.1.exe" class="btn-download btn-download-primary he" style="margin-top:10px;">
+        ⬇ הורד את FlowGuard-Setup-v2.1.1.exe
+      </a>
+    </div>
+
+    <!-- Linux -->
+    <div class="platform-card">
+      <span class="platform-badge badge-soon">Coming Soon</span>
+      <span class="platform-icon">🐧</span>
+      <div class="platform-name">Linux</div>
+      <div class="platform-desc">Bash installer + systemd service. Supports Ubuntu 20+, Debian 11+, RHEL 8+.</div>
+      <div class="platform-meta">
+        <div class="platform-meta-row"><span>Status</span><span>In Development</span></div>
+        <div class="platform-meta-row"><span>ETA</span><span>Q2 2026</span></div>
+        <div class="platform-meta-row"><span>Format</span><span>.sh installer + .deb</span></div>
+        <div class="platform-meta-row"><span>Auto-start</span><span>systemd service</span></div>
+      </div>
+      <a href="#" class="btn-download btn-download-disabled">Coming Soon</a>
+    </div>
+
+    <!-- macOS -->
+    <div class="platform-card">
+      <span class="platform-badge badge-soon">Coming Soon</span>
+      <span class="platform-icon"></span>
+      <div class="platform-name">macOS</div>
+      <div class="platform-desc">.pkg installer with launchd auto-start. Supports macOS 12 Monterey and later.</div>
+      <div class="platform-meta">
+        <div class="platform-meta-row"><span>Status</span><span>Planned</span></div>
+        <div class="platform-meta-row"><span>ETA</span><span>Q3 2026</span></div>
+        <div class="platform-meta-row"><span>Format</span><span>.pkg + Homebrew formula</span></div>
+        <div class="platform-meta-row"><span>Auto-start</span><span>launchd plist</span></div>
+      </div>
+      <a href="#" class="btn-download btn-download-disabled">Coming Soon</a>
+    </div>
+
+  </div>
+
+  <!-- Install Steps -->
+  <div class="steps-section" style="background:none; padding: 0; margin-bottom: 60px;">
+    <div class="steps-inner" style="padding: 0;">
+      <div class="section-title">Quick Install — Windows</div>
+      <div class="section-sub">Up and running in under 60 seconds</div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title">Download</div>
+          <div class="step-desc">Click the download button above to get the installer EXE</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title">Run as Admin</div>
+          <div class="step-desc">Right-click the EXE → "Run as administrator"</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title">Configure</div>
+          <div class="step-desc">Setup wizard — choose install path, optionally add Telegram token</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-title">Done ✓</div>
+          <div class="step-desc">FlowGuard starts monitoring Claude Code automatically. Tray icon appears.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- REQUIREMENTS -->
+<div class="requirements">
+  <div class="req-inner">
+    <div class="section-title">System Requirements</div>
+    <div class="section-sub">Minimum requirements for FlowGuard v1.0.0</div>
+    <div class="req-grid">
+      <div class="req-item">
+        <span class="req-icon">🖥️</span>
+        <div>
+          <div class="req-title">Operating System</div>
+          <div class="req-val">Windows 10 / 11 (x64)</div>
+        </div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">⚡</span>
+        <div>
+          <div class="req-title">Claude Code CLI</div>
+          <div class="req-val">Required (hooks integration)</div>
+        </div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">💾</span>
+        <div>
+          <div class="req-title">Disk Space</div>
+          <div class="req-val">~50 MB (Node.js bundled)</div>
+        </div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">🔐</span>
+        <div>
+          <div class="req-title">Permissions</div>
+          <div class="req-val">Admin (install only)</div>
+        </div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">🌐</span>
+        <div>
+          <div class="req-title">Network</div>
+          <div class="req-val">Optional (for Telegram + auto-update)</div>
+        </div>
+      </div>
+      <div class="req-item">
+        <span class="req-icon">📡</span>
+        <div>
+          <div class="req-title">Node.js</div>
+          <div class="req-val">Bundled — nothing to install</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELEASE NOTES -->
+<div class="release-section">
+  <div class="section-title">Release Notes</div>
+  <div class="section-sub">What's new in each version</div>
+
+  <div class="version-card">
+    <div class="version-header">
+      <span class="version-num">v1.0.0</span>
+      <span class="version-date">April 2026</span>
+      <span class="version-tag">Latest</span>
+    </div>
+    <ul class="change-list">
+      <li><strong>Real-time monitoring</strong> — 69+ rules across 8 categories (file, network, git, process, secrets, lateral movement)</li>
+      <li><strong>Telegram alerts</strong> — instant push notifications with full event details and risk level</li>
+      <li><strong>System Tray</strong> — PC name, agent ON/OFF toggle, silent mode, live stats</li>
+      <li><strong>Dashboard</strong> — browser-based dashboard with events timeline, file audit, scanner, SIEM</li>
+      <li><strong>Auto-Update</strong> — rules.js auto-updates from GitHub on every start</li>
+      <li><strong>Hash chain integrity</strong> — cryptographic chaining prevents log tampering</li>
+      <li><strong>Excel export</strong> — download security reports as formatted Excel files</li>
+      <li><strong>CEF export</strong> — Common Event Format for SIEM integration</li>
+      <li><strong>Windows auto-start</strong> — Task Scheduler (FlowGuard-Collector + FlowGuard-Tray) at login</li>
+      <li><strong>Silent installer</strong> — <code>install.ps1 -Silent</code> for enterprise deployment</li>
+    </ul>
+  </div>
+
+  <div class="sha-box">
+    <div class="sha-title">File Integrity</div>
+    <div class="sha-row">
+      <span class="sha-file">FlowGuard-Setup-v1.0.0.exe</span>
+      <span>SHA-256: published with each release</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 FlowGuard. Open source. Runs locally. Your data never leaves your machine.</p>
+  <p style="margin-top: 8px;"><a href="index.html">Home</a> · <a href="demo.html">Demo</a> · <a href="about.html">About</a> · <a href="https://github.com/eran73-png/ehz-sec-ai">GitHub</a></p>
+  <p class="footer-ehz">הדף נבנה ע"י EHZ-AI | 054-4825276</p>
+</footer>
+
+<script>
+function applyLang(isHe) {
+  document.body.classList.toggle('he-mode', isHe);
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr';
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = isHe ? '🇺🇸 English' : '🇮🇱 עברית';
+  localStorage.setItem('fg-lang', isHe ? 'he' : 'en');
+}
+function toggleLang() { applyLang(!document.body.classList.contains('he-mode')); }
+(function() { if (localStorage.getItem('fg-lang') === 'he') applyLang(true); })();
+</script>
+</body>
+</html>
