@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Troubleshoot — FlowGuard</title>
+<meta name="description" content="Installation failed? Download our diagnostic tool and we'll help you resolve the issue."/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #060b14; --bg2: #0a1020; --panel: #0d1830; --border: #1a2d4a;
+  --accent: #00d4ff; --accent2: #6366f1;
+  --green: #10b981; --yellow: #f59e0b; --red: #ef4444;
+  --text: #e2e8f0; --muted: #64748b; --muted2: #94a3b8;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(6,11,20,0.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { font-size: 18px; font-weight: 800; color: var(--accent); text-decoration: none; letter-spacing: .5px; }
+.nav-links a { color: var(--muted2); text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 28px; transition: color .2s; }
+.nav-links a:hover { color: var(--accent); }
+
+.container { max-width: 960px; margin: 0 auto; padding: 120px 24px 80px; }
+
+.hero {
+  text-align: center; margin-bottom: 56px;
+}
+.hero-icon {
+  font-size: 64px; margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1.1;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--red), var(--yellow));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p {
+  font-size: 18px; color: var(--muted2); max-width: 640px; margin: 0 auto; line-height: 1.6;
+}
+
+.main-card {
+  background: linear-gradient(135deg, rgba(239,68,68,0.06), rgba(245,158,11,0.04));
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 20px; padding: 40px; margin-bottom: 32px;
+  text-align: center;
+}
+.main-card h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+.main-card p { color: var(--muted2); font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
+
+.download-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, var(--red), var(--yellow));
+  color: #fff; text-decoration: none; font-weight: 700; font-size: 16px;
+  padding: 18px 36px; border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(239,68,68,0.3);
+  transition: transform .2s, box-shadow .2s;
+}
+.download-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(239,68,68,0.4); }
+.download-btn-icon { font-size: 22px; }
+.download-meta { margin-top: 14px; font-size: 12px; color: var(--muted); }
+
+.steps {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px; margin-bottom: 32px;
+}
+.steps h3 { font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--accent); }
+.step-row { display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+.step-num {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.step-content { flex: 1; }
+.step-title { font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.step-desc { font-size: 13px; color: var(--muted2); line-height: 1.5; }
+
+.privacy {
+  background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 12px; padding: 20px; margin-bottom: 32px;
+}
+.privacy-title { color: var(--green); font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+.privacy-list { list-style: none; padding: 0; }
+.privacy-list li { font-size: 13px; color: var(--muted2); padding: 4px 0; padding-left: 20px; position: relative; }
+.privacy-list li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+.contact {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px; text-align: center;
+}
+.contact-title { font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+.contact a { color: var(--text); text-decoration: none; font-weight: 500; }
+.contact a:hover { color: var(--accent); }
+.contact-row { margin: 6px 0; font-size: 14px; color: var(--muted2); }
+
+.footer {
+  text-align: center; padding: 40px 24px; color: var(--muted);
+  font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">🛡️ FlowGuard</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/download.html">Download</a>
+    <a href="/troubleshoot.html" style="color:var(--accent);">Troubleshoot</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-icon">🩺</div>
+    <h1>Installation Failed?</h1>
+    <p>Don't worry — we've got you covered. Download our diagnostic tool and we'll help you resolve the issue within 24 hours.</p>
+  </div>
+
+  <div class="main-card">
+    <h2>📦 FlowGuard Diagnostics Tool</h2>
+    <p>A standalone, portable tool that collects install logs and system info. No installation required — just download and run.</p>
+
+    <a href="/files/FlowGuard-Diagnostics.exe" class="download-btn" download>
+      <span class="download-btn-icon">⬇️</span>
+      <span>Download FlowGuard-Diagnostics.exe</span>
+    </a>
+
+    <div class="download-meta">
+      Windows 10/11 · ~38 MB · No installation required
+    </div>
+  </div>
+
+  <div class="steps">
+    <h3>How it works</h3>
+
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Download the tool</div>
+        <div class="step-desc">Click the download button above. Save it anywhere (Desktop is fine).</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Run it (double-click)</div>
+        <div class="step-desc">A console window will open and the tool will collect diagnostic information. This takes 5-15 seconds.</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Your email client opens</div>
+        <div class="step-desc">The tool creates a sanitized ZIP file on your Desktop and opens your default email client with everything pre-filled — ready to send to support.</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Drag the ZIP into the email</div>
+        <div class="step-desc">A File Explorer window opens with the ZIP selected. Drag it into the email, add a short description of the issue, and click Send.</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">We'll get back to you</div>
+        <div class="step-desc">Eran personally reviews every report and responds within 24 hours with a solution.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="privacy">
+    <div class="privacy-title">🔒 Your privacy is protected</div>
+    <ul class="privacy-list">
+      <li>Tokens, passwords, and API keys are automatically redacted</li>
+      <li>Your username is replaced with [USER] in all paths and logs</li>
+      <li>Telegram bot tokens are removed before packaging</li>
+      <li>All sanitization happens locally — no data leaves your computer until you click Send</li>
+      <li>The ZIP file is saved to your Desktop so you can review it before sending</li>
+    </ul>
+  </div>
+
+  <div class="contact">
+    <div class="contact-title">Need help right now?</div>
+    <div class="contact-row">📧 Email: <a href="mailto:eranhz26@gmail.com">eranhz26@gmail.com</a></div>
+    <div class="contact-row">📱 Phone/WhatsApp: <a href="tel:+972544825276">054-4825276</a></div>
+    <div class="contact-row" style="margin-top:10px;color:var(--muted);font-size:12px;">
+      Eran Hazut — FlowGuard Developer
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  © 2026 FlowGuard · Built by EHZ-AI · <a href="mailto:eranhz26@gmail.com" style="color:var(--accent);">eranhz26@gmail.com</a>
+</div>
+
+</body>
+</html>
